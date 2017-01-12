@@ -2,6 +2,7 @@
 import Promise from "./promise";
 import Ember from "ember";
 import Velocity from "velocity";
+import ENV from '../config/environment';
 
 // Make sure Velocity always has promise support by injecting our own
 // RSVP-based implementation if it doesn't already have one.
@@ -9,11 +10,13 @@ if (!Velocity.Promise) {
   Velocity.Promise = Promise;
 }
 
+var config = ENV['liquid-fire'] || {};
+
 // Velocity's tick() defaults to RAF's high resolution timestamp. If the browser
 // is under high stress the RAF timestamp may have a significant offset which
 // can result in dropping a large chunk of frames. Because of this, the use of
 // the RAF timestamp should be opt-in.
-Velocity.timestamp = false;
+Velocity.timestamp = config.useRAFTimestamp || false;
 
 export function animate(elt, props, opts, label) {
   // These numbers are just sane defaults in the probably-impossible
