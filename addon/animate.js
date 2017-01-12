@@ -2,7 +2,7 @@
 import Promise from "./promise";
 import Ember from "ember";
 import Velocity from "velocity";
-import ENV from '../config/environment';
+import ENV from '../environment';
 
 // Make sure Velocity always has promise support by injecting our own
 // RSVP-based implementation if it doesn't already have one.
